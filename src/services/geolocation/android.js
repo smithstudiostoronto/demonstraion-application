@@ -1,8 +1,9 @@
 import {store} from '../../state/store';
+import { Navigation } from "react-native-navigation";
 import Geolocation from 'react-native-geolocation-service';
 import {PermissionsAndroid} from 'react-native';
 
-export const watchPositionAndroid = async () => {
+export const watchPositionAndroid = async (callback) => {
 
   //requesting location permisions
   try {
@@ -22,7 +23,7 @@ export const watchPositionAndroid = async () => {
           let temp_location = {latitude: location.coords.latitude , 
             longitude: location.coords.longitude}
             store.setLocation(temp_location)
-            store.setAppIsLoading(false)
+            if (callback) callback() 
         },
         (error) => {
             // See error code charts below.
@@ -40,5 +41,5 @@ export const watchPositionAndroid = async () => {
 
 export const clearWatchAndroid = async (watchId) => {
   Geolocation.clearWatch(watchId)
-  store.setAppIsLoading(true)
+
 }

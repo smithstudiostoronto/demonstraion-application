@@ -1,7 +1,7 @@
 import {store} from '../../state/store';
+import { Navigation } from "react-native-navigation";
 
-
-export const watchPositionIos = async () => {
+export const watchPositionIos = async (callback) => {
   
   await navigator.geolocation.requestAuthorization();
 
@@ -11,7 +11,7 @@ export const watchPositionIos = async () => {
                         longitude: location.coords.longitude}
 
     store.setLocation(temp_location)
-    store.setAppIsLoading(false)
+    if (callback) callback() 
   }, (error) => {
       console.log(error)
   }, {enableHighAccuracy: true});
@@ -19,5 +19,4 @@ export const watchPositionIos = async () => {
 
 export const clearWatchIos = async (watchId) => {
   navigator.geolocation.clearWatch(watchId);
-  store.setAppIsLoading(true);
 }

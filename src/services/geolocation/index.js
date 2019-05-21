@@ -1,6 +1,13 @@
-export {watchPositionAndroid, clearWatchAndroid}from "./android";
+import {watchPositionAndroid, clearWatchAndroid}from "./android";
+import {watchPositionIos, clearWatchIos} from "./ios";
+import {Platform} from 'react-native';
 
+export const geolocationService = {
+  androidWatch: watchPositionAndroid,
+  androidClearWatch: clearWatchAndroid,
 
-export {watchPositionIos, clearWatchIos} from "./ios";
+  iosWatch: watchPositionIos,
+  iosClearWatch: clearWatchIos,
 
-
+  watchLocation: Platform.OS === 'ios' ?  watchPositionIos :  watchPositionAndroid
+}

@@ -1,19 +1,24 @@
 import { Navigation } from "react-native-navigation";
-import {Platform} from 'react-native';
+import SplashScreen from 'react-native-splash-screen';
+
+import {geolocationService} from './src/services/geolocation';
+import {mainRoot} from './src/screens/layouts/mainRoot';
 
 /**** COMPONENTS ****/
 import App from "./App";
+import SideMenuLeft from './src/components/SideMenu/SideMenuLeft';
 
 
-Navigation.registerComponent(`navigation.playground.WelcomeScreen`, () => App);
+Navigation.registerComponent(`App`, () => App);
+Navigation.registerComponent(`SideMenuLeft`, () => SideMenuLeft);
 
-Navigation.events().registerAppLaunchedListener(() => {
-  Navigation.setRoot({
-    root: {
-      component: {
-        name: "navigation.playground.WelcomeScreen"
-      }
-    }
+
+Navigation.events().registerAppLaunchedListener( () => {
+
+  // Start tracking geolocation then launch main root
+  geolocationService.watchLocation(() => {
+    Navigation.setRoot(mainRoot);
+    SplashScreen.hide();
   });
 });
 

@@ -102,7 +102,7 @@ android {
     }
     defaultConfig {
         multiDexEnabled true
-        applicationId "com.appletreestudentapp"
+        applicationId "com.smithstudiosdemonstraionapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         missingDimensionStrategy "RNN.reactNativeVersion", "reactNative57_5" // See note below!
@@ -139,6 +139,7 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-splash-screen')
     implementation project(':react-native-spinkit')
     implementation project(':react-native-vector-icons')
     implementation fileTree(dir: "libs", include: ["*.jar"])
