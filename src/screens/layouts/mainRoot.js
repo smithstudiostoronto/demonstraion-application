@@ -111,7 +111,7 @@ export const mainRoot =  {root: {
 
     center: {
       component: {
-        name: 'SideMenuLeft',
+        name: 'SignIn',
 
       }
     } ,

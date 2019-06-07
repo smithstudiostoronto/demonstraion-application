@@ -7,10 +7,11 @@ import {mainRoot} from './src/screens/layouts/mainRoot';
 /**** COMPONENTS ****/
 import App from "./App";
 import SideMenuLeft from './src/components/SideMenu/SideMenuLeft';
-
+import SignIn from './src/components/SignIn/SignIn';
 
 Navigation.registerComponent(`App`, () => App);
 Navigation.registerComponent(`SideMenuLeft`, () => SideMenuLeft);
+Navigation.registerComponent(`SignIn`, () => SignIn);
 
 
 Navigation.events().registerAppLaunchedListener( () => {

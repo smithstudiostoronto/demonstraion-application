@@ -115,19 +115,14 @@ ios-radio-button-on*/
                     </View>
                 </View>
                 <View style={styles.middleContainer}>
-                    <View>
+                    <View style={{display: 'none'}}>
                         <FlatList data={personalMenu} 
                                     scrollEnabled={false} 
                                     renderItem={({item}) => this.listItemRender(item)}/>
                     </View>
                 </View>
                 <View style={styles.bottomContainer}>
-                    <Button  title='START A PROJECT' 
-                             buttonStyle={styles.button} 
-                             containerStyle={styles.buttonCont} 
-                             titleStyle={styles.buttonTitle}
-                             iconContainerStyle={styles.buttonIcon}
-                             />
+
                 </View>
             </ImageBackground>
         )
@@ -135,7 +130,16 @@ ios-radio-button-on*/
 }
 
 // cellphone-settings-variant
-/*                        <Image source={require('../../../assets/images/logos/jump_logo_black.png')} 
+/*                        
+                    <Button  title='START A PROJECT' 
+                             buttonStyle={styles.button} 
+                             containerStyle={styles.buttonCont} 
+                             titleStyle={styles.buttonTitle}
+                             iconContainerStyle={styles.buttonIcon}
+                             
+                             />
+
+<Image source={require('../../../assets/images/logos/jump_logo_black.png')} 
                                 style={{width: 230, height: 140}}/> */
 
 const styles = StyleSheet.create({
@@ -158,13 +162,13 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'flex-end',
         //backgroundColor: '#0D0D0D',
-        backgroundColor: 'rgba(0,0,0,0.8)',
+        backgroundColor:'rgba(15,15,15,1)',//'rgba(0,0,0,0.8)',
         //marginLeft: -10,
         paddingHorizontal: 10,
         paddingBottom: 5,
         //borderColor: 'green', borderWidth:1
-        borderColor: 'rgba(0,0,0,0.2)',
-        borderBottomWidth: 2
+    
+        //borderBottomWidth: 2
     },
     middleContainer: {
         flex: 3,
@@ -172,12 +176,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         // borderTopWidth:1,
         // borderBottomWidth:1,
-        borderColor: '#DFDCE3',
-   
+        
        // backgroundColor: '#0D0D0D',
-      
        //backgroundColor: 'white',
-       backgroundColor: 'rgba(0,0,0,0.6)',
+       backgroundColor:'rgba(15,15,15,1)',
     },
     itemContainer: {
         width: '100%',
@@ -217,7 +219,8 @@ const styles = StyleSheet.create({
         flex: 0.75,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'rgba(0,0,0,0.6)',
+        //backgroundColor: 'rgba(0,0,0,0.6)',
+        backgroundColor:'rgba(15,15,15,1)',
         //backgroundColor: '#0D0D0D',
         //marginLeft: -10,
         width: 300
