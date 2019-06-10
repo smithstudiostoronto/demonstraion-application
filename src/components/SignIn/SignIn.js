@@ -40,49 +40,42 @@ export default class SignIn extends Component<Props> {
 
    login = async () => {
 
-    let body = {
-      email: 'personal@mail.com', //this.emailInput.state.enteredText,
-      password: 'test'//this.passwordInput.state.enteredText
-    }
+    
+    setTimeout(()=>{
+      this.emailInput.sucess()
+      this.passwordInput.sucess()
 
-    let options = {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers: {
-        "Content-Type": "application/json"
-      },   
-    }
+    }, 3000);
+  //  fetch(userRoute, options)
+  //     .then((response) => response.json())
+  //     .then((responsesJson) => {
+  //       //Stopring web token
+  //       if (responsesJson.token){
+  //         store.setAuthToken(responsesJson.token);
+  //         store.updateUserData(responsesJson.userData);
+  //         goHome() 
+  //         //goToService()
+  //       }
+  //       else {
+  //         let errorCode = responsesJson.errorCode;
+  //         this.loginButton.reset()
+  //         if(errorCode === 'blank-email' ||
+  //            errorCode === 'auth/user-not-found' ||
+  //            errorCode === 'auth/invalid-email') {
+  //             this.emailInput.error();
+  //            }
+  //         if(errorCode === 'blank-password' ||
+  //            errorCode === 'auth/wrong-password') {
+  //             this.passwordInput.error();
+  //           }
+  //         this.refs.toast.show(responsesJson.message, 1500);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
 
-    let userRoute = "http://localhost:8080/user/sign-in"
 
-   fetch(userRoute, options)
-      .then((response) => response.json())
-      .then((responsesJson) => {
-        //Stopring web token
-        if (responsesJson.token){
-          store.setAuthToken(responsesJson.token);
-          store.updateUserData(responsesJson.userData);
-          goHome() 
-          //goToService()
-        }
-        else {
-          let errorCode = responsesJson.errorCode;
-          this.loginButton.reset()
-          if(errorCode === 'blank-email' ||
-             errorCode === 'auth/user-not-found' ||
-             errorCode === 'auth/invalid-email') {
-              this.emailInput.error();
-             }
-          if(errorCode === 'blank-password' ||
-             errorCode === 'auth/wrong-password') {
-              this.passwordInput.error();
-            }
-          this.refs.toast.show(responsesJson.message, 1500);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
   }
 
   navigate = (screenName) => {
@@ -104,7 +97,7 @@ export default class SignIn extends Component<Props> {
             contentContainerStyle={styles.container} 
             resetScrollToCoords={{ x: 0, y: 0}}>
               <View style={styles.logoContainer}>
-                <Image style={styles.logo} source={require('../../../assets/images/logos/Jump-Logo-white-05.png')}></Image>
+                <Image style={styles.logo}  resizeMode="contain" source={require('../../../assets/images/logos/Jump-Logo-white-05.png')}></Image>
               </View>
               <View style={styles.inputBlock}>
                 <LoginInput 
@@ -112,6 +105,9 @@ export default class SignIn extends Component<Props> {
                   placeholder="Email" 
                   icon='ios-mail' 
                   style={styles.input}
+                  autoFocus={true}
+                  returnKeyType={'next'}
+                  onSubmitEditing={() => { this.passwordInput.focus(); }}
                   textContentType='username'>
                 </LoginInput>
                 <LoginInput 
@@ -120,9 +116,14 @@ export default class SignIn extends Component<Props> {
                   icon='ios-lock' 
                   secure={true} 
                   style={styles.input}
+                  returnKeyType={'go'}
+                  onSubmitEditing={() => {
+                    this.loginButton.beginAnimation()
+                    this.login()
+                  }}
                   textContentType='password'>
                 </LoginInput>
-                <TouchableOpacity onPress={() => this.navigate('ForgotPassword')}>
+                <TouchableOpacity onPress={() => this.navigate('DeadEnd')}>
                   <View style={styles.forgotPasssCont}>
                     <Text style={style=styles.forgotPasssButton}>Forgot Password?</Text>
                   </View>
@@ -138,7 +139,7 @@ export default class SignIn extends Component<Props> {
           </KeyboardAwareScrollView>
           <View style={styles.signUpBlock}>
             <Text style={styles.signUpText}>Don't have an account yet?</Text>
-            <TouchableOpacity onPress={() => this.navigate('SignUpInter')}>
+            <TouchableOpacity onPress={() => this.navigate('DeadEnd')}>
               <View>
                 <Text style={style=styles.signUpButtonText}>Sign Up</Text>
               </View>
@@ -176,20 +177,22 @@ const styles = StyleSheet.create({
   },
 
   /*** LOGO ***/
-
+logo: {
+  flex:0.8, height: undefined, width: undefined,     borderColor: 'green',
+  borderWidth: 2
+  },
   logoContainer: {
     flex: 5,  
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+
     marginBottom: 40,
-
-    marginBottom: 175
+    margin: '10%',
+    marginBottom: 175,
+    
+    justifyContent: 'flex-end',
+    borderColor: 'white',
+    borderWidth: 2
   },
-  logo: {
-    width: 300,
-    height: 150,
 
-  },
 
   /*** INPUT + LOGIN ***/
 
@@ -197,6 +200,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: "center",
     flex: 4,
+
+    borderColor: 'white',
+    borderWidth: 2
   },
   inputContainer: {
     borderWidth: 3,
@@ -214,7 +220,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0
   },
   input: {
-    margin: 10
+    margin: 10,
+    color: 'white'
   },
   loginButton: {
     marginTop: 40,

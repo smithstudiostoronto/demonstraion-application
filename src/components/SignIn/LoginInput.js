@@ -27,6 +27,7 @@ export default class LoginInput extends Component<Props> {
     this.state = {
       borderColor: '#F5FCFF',
       iconColor: '#F5FCFF',
+      opacity: 0.8,
       iconPadding: new Animated.Value(0),
       enteredText: ''
     }
@@ -37,6 +38,12 @@ export default class LoginInput extends Component<Props> {
       this.state.iconColor = '#cc0000';
       this.forceUpdate();
       this.shake();
+  }
+
+  sucess = () => {
+    this.state.borderColor = '#57b846';
+    this.state.iconColor = '#57b846';
+    this.forceUpdate();
   }
   
   shake = () => {
@@ -55,9 +62,9 @@ export default class LoginInput extends Component<Props> {
 
 
    
-    await this.setState({borderColor: '#57b846'})
-    await this.setState({iconColor: '#57b846'})
-
+    //await this.setState({borderColor: '#57b846'})
+    //await this.setState({iconColor: '#57b846'})
+    this.setState({opacity: 1})
      if(typeof this.props.onFocus === "function"){
       await this.props.onFocus();
       
@@ -69,10 +76,10 @@ export default class LoginInput extends Component<Props> {
     this.state.iconPadding,         
     {
       toValue: 12,                  
-      duration: 250,      
+      duration: 265,      
     }
   ).start()
-
+    this.input.focus()
   }
 
   blur = () => {
@@ -85,8 +92,9 @@ export default class LoginInput extends Component<Props> {
         }
     ).start()
       console.log("blur deep")
-   this.state.borderColor = '#F5FCFF'
-   this.state.iconColor = '#F5FCFF'
+  //  this.state.borderColor = '#F5FCFF'
+  //  this.state.iconColor = '#F5FCFF'
+  this.setState({opacity: 0.8});
    this.forceUpdate()
    if(typeof this.props.onBlur === "function"){
     this.props.onBlur();
@@ -107,6 +115,7 @@ export default class LoginInput extends Component<Props> {
       });
     return ( 
         <Animated.View style={{...styles.container, 
+                              opacity: this.state.opacity,
                               borderColor: this.state.borderColor, 
                               transform: [{ translateX }], 
                               ...this.props.style}}>
@@ -116,8 +125,9 @@ export default class LoginInput extends Component<Props> {
           </Animated.View>
           <View style={styles.inputContainer}>
             <TextInput placeholder={this.props.placeholder} 
-                        style={styles.input}
+                        style={{...styles.input, opacity: this.state.opacity }}
                         onFocus={this.focus}
+                        ref={(_ref) => this.input = _ref} 
                         onBlur={this.blur}
                         secureTextEntry={this.props.secure}
                         autoCapitalize={this.props.autoCapitalize ? this.props.autoCapitalize: 'none'}
@@ -125,6 +135,9 @@ export default class LoginInput extends Component<Props> {
                         textContentType={this.props.textContentType}
                         value={this.state.enteredText}
                         placeholderTextColor='#F5FCFF'
+                        autoFocus={this.props.autoFocus}
+                        returnKeyType={this.props.returnKeyType}
+                        onSubmitEditing={this.props.onSubmitEditing}
             />
           </View>
         </Animated.View>
@@ -136,7 +149,7 @@ const styles = StyleSheet.create({
 
     container: {
         height: 40,
-        width: 250,
+        width: 265,
         borderRadius: 40,
         borderWidth: 2,
         flexDirection: 'row',
@@ -151,7 +164,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         borderRadius: 60,
         height: 40,
-        width: 250,
+        width: 265,
       },
       input: {
         height: '100%',
