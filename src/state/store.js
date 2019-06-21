@@ -10,8 +10,8 @@ const state = remx.state(initialState);
 
 const getters = remx.getters({
  
-        getLocation() {
-            return state.location;
+        getScreenConstants() {
+            return state.screenConstants;
         },
 
 
@@ -24,6 +24,10 @@ const setters = remx.setters({
         console.log(location)
         state.location = location
         EventRegister.emit('location', location)
+    },
+
+    setScreenConstants(screenConsts) {
+        state.screenConstants = screenConsts;
     },
 
 });

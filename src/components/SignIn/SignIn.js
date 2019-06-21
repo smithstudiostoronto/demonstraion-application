@@ -10,7 +10,8 @@ import {
   TextInput,Button, 
   TouchableOpacity,
   AsyncStorage,
-  Picker
+  Picker,
+  Animated
 } from 'react-native';
 
 /**** NAVIGATION ****/
@@ -26,6 +27,7 @@ import IonIcon from 'react-native-vector-icons/Ionicons';
 /**** CUSTOM COMPONENTS ****/
 import LoginButton from './LoginButton';
 import LoginInput from './LoginInput';
+import { AnimatedRegion } from 'react-native-maps';
 
 type Props = {};
 export default class SignIn extends Component<Props> {
@@ -33,9 +35,27 @@ export default class SignIn extends Component<Props> {
   constructor(props) {
     super(props);
     this.state = {
-
+      contAnimatedWidth: new Animated.Value (0),
+      contAnimatedHeight: new Animated.Value(0),
     }
     //this.login()
+  }
+
+  // Ensuring that side menu width is constant across all devices
+  static options(passProps) {
+    return {
+
+      sideMenu: {
+        left: {
+          width: 300
+        },
+        center: {
+          component: {
+
+          }
+        }
+      }
+    };
   }
 
    login = async () => {
@@ -44,8 +64,26 @@ export default class SignIn extends Component<Props> {
     setTimeout(()=>{
       this.emailInput.sucess()
       this.passwordInput.sucess()
+      Animated.parallel([
+        Animated.timing(                  
+          this.state.contAnimatedWidth,         
+          {
+            toValue: 1,                  
+            duration: 300,      
+          }
+        ),
+        Animated.timing(                  
+          this.state.contAnimatedHeight,            
+          {
+            toValue: Dimensions.get('window').height ,               
+            duration: 100,             
+          }
+        )
+      ]).start()
 
     }, 3000);
+
+
   //  fetch(userRoute, options)
   //     .then((response) => response.json())
   //     .then((responsesJson) => {
@@ -105,6 +143,7 @@ export default class SignIn extends Component<Props> {
                   placeholder="Email" 
                   icon='ios-mail' 
                   style={styles.input}
+                  keyboardType={"email-address"}
                   autoFocus={true}
                   returnKeyType={'next'}
                   onSubmitEditing={() => { this.passwordInput.focus(); }}
@@ -129,6 +168,7 @@ export default class SignIn extends Component<Props> {
                   </View>
                 </TouchableOpacity>
                 <View style={styles.loginButton}>
+                 
                   <LoginButton 
                     ref={(_ref) => this.loginButton = _ref} 
                     onPress={this.login}>
@@ -146,6 +186,12 @@ export default class SignIn extends Component<Props> {
             </TouchableOpacity>
           </View>
           </View>
+          <Animated.View style={{...styles.animatedSheet, 
+                                        opacity: this.state.contAnimatedHeight,
+                                        height: '0%',
+                                        width: '0%'}}>
+
+                  </Animated.View>
         </ImageBackground>
     );
   }
@@ -155,6 +201,16 @@ export default class SignIn extends Component<Props> {
 const styles = StyleSheet.create({
 
   /*** SETUP ***/
+
+  animatedSheet:{
+    width: 50,
+    position: 'absolute',
+    zIndex: 20,
+    backgroundColor: 'white',
+
+
+  },
+
   sheet: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
@@ -178,19 +234,21 @@ const styles = StyleSheet.create({
 
   /*** LOGO ***/
 logo: {
-  flex:0.8, height: undefined, width: undefined,     borderColor: 'green',
-  borderWidth: 2
+ height: 250 , width: 350,     
+//  borderColor: 'green',
+//   borderWidth: 2
   },
   logoContainer: {
     flex: 5,  
 
-    marginBottom: 40,
-    margin: '10%',
-    marginBottom: 175,
+    marginBottom: 120,
+    //margin: '10%',
+    //marginBottom: 175,
     
     justifyContent: 'flex-end',
-    borderColor: 'white',
-    borderWidth: 2
+    alignItems: 'center',
+    // borderColor: 'white',
+    // borderWidth: 2
   },
 
 
@@ -201,8 +259,8 @@ logo: {
     alignItems: "center",
     flex: 4,
 
-    borderColor: 'white',
-    borderWidth: 2
+    // borderColor: 'white',
+    // borderWidth: 2
   },
   inputContainer: {
     borderWidth: 3,
@@ -224,8 +282,9 @@ logo: {
     color: 'white'
   },
   loginButton: {
-    marginTop: 40,
-    marginBottom: 250
+    marginTop: 50,
+    marginBottom: 250,
+    alignItems: 'center'
   },
 
   /*** SIGN-UP ***/
@@ -236,6 +295,7 @@ logo: {
     margin: 10,
     flexDirection: 'row',
     alignItems: 'center',
+    paddingBottom: 15
   },
   signUpText: {
     fontFamily: 'OpenSans-Regular',
@@ -252,7 +312,7 @@ logo: {
 
   forgotPasssCont:{
     width: 250,
-    paddingLeft: 17.5
+    paddingLeft: 3
   },
   forgotPasssButton:{
     fontFamily: 'OpenSans-Regular',

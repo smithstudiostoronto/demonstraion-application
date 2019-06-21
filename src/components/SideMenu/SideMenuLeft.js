@@ -1,136 +1,179 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  Dimensions,
-  ImageBackground,
-  TouchableOpacity,
-  Image
+    View,
+    Text,
+    StyleSheet,
+    FlatList,
+    Dimensions,
+    ImageBackground,
+    TouchableOpacity,
+    Image
 } from 'react-native'
 
 /***  NAVIGATION  ***/
-import {Navigation} from 'react-native-navigation'; 
-import {Button} from 'react-native-elements';
+import { Navigation } from 'react-native-navigation';
+import { Button } from 'react-native-elements';
 
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { store } from '../../state/store';
 
-const personalMenu = [
-    {key: 'HOME', icon: 'ios-home', nav: 'MainMap', first: true},
-    {key: 'EXPLORE', icon: 'ios-search', nav: 'Explore'},
-    {key: 'SAVED', icon: 'ios-heart', nav: 'Saved'},
-    {key: 'CHAT', icon: 'ios-chatboxes', nav: 'Chat'},
-    {key: 'SERVICE', icon: 'ios-cash', nav: 'HomeService'},
+import * as Progress from 'react-native-progress';
+
+const navMenuList = [
+    { key: 'LOGIN', icon: 'ios-home', nav: 'MainMap', i: 1 },
+    { key: 'CREDIT CARD', icon: 'ios-search', nav: 'Explore', i: 2 },
+    { key: 'MAP', icon: 'ios-heart', nav: 'Saved', i: 3 },
+    { key: 'SWIPER', icon: 'ios-chatboxes', nav: 'Chat', i: 4 },
 ]
 
-
-
-
+const accentColor = '#1FB85A';
 type Props = {};
 export default class SideMenuLeft extends Component<Props> {
     constructor(props) {
         super(props);
         this.state = {
-            selectedPage: 0
+            selected: 'SignIn',
+            progress: 0,
         }
         Navigation.events().bindComponent(this);
     }
 
     navigate = (screenName) => {
         Navigation.push(this.props.componentId, {
-          component:{
-            name: screenName
-          }
+            component: {
+                name: screenName
+            }
         })
     }
-    static options(passProps) {
-        return {
-          sideMenu: {
-        left: {
-          width: 300
-        }
-          }
-        };
-      }
-
-      /*
-
-<View style={{paddingLeft: 10}}>
-            <View style={styles.line}></View>
-            <View style={{ flexDirection:'row', alignItems: 'center', }}>
-
-             <View style={styles.leftCont}>
-          
-                <IonIcon name="ios-radio-button-off" color="white" size={18}/>
-            </View>
-            <TouchableOpacity onPress={() => console.log('sdf')}>
-                <View style={styles.itemContainer}>
-              
-                    <Text style={styles.item}>{item.key}</Text>
-                </View>
-            </TouchableOpacity>
-            </View>
-            </View>
-
-
-      */
-    listItemRender(item) {
-        return( 
-            <View style={{paddingLeft: 10,  justifyContent: 'center', alignItems: 'center'}}>
-            { item.first !== true && <View style={styles.line}></View> }
-            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-
-             <View style={styles.leftCont}>
-          
-              
-            </View>
-            <TouchableOpacity onPress={() => console.log('sdf')}>
-                <View style={styles.itemContainer}>
-              
-                    <Text style={styles.item}>{item.key}</Text>
-                </View>
-            </TouchableOpacity>
-            </View>
-            </View>
-            );
+   
+    componentDidAppear() {
+        console.log('fired')
+        setTimeout(()=>  this.setState({progress: 0.6}), 2500)
+   
     }
-    /*ios-radio-button-off
-
-ios-radio-button-on*/
+    componentDidDisappear() {
+      
+        this.setState({progress: 0});
+    }
+    /*
+    getConstants = async () => {
+        const constants = await Navigation.constants();
+        const statusBarHeight = constants.statusBarHeight;
+        return statusBarHeight;
+    }
+    */
+
+    navHandler = async (destinationName) => {
+
+        await this.setState({selected: destinationName});
+    }
+
     render() {
         return (
-            <ImageBackground   blurRadius={5} source={require('../../../assets/backgrounds/try.jpg')} style={styles.container} >
-                <View style={styles.nameContainer} >
-                    <View style={{ width: '100%' ,flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', }}>
-
-                   <View style={{flex:0.7}}>
-                    <Image source={require('../../../assets/images/logos/SmithStudios_Logo_white.png')} resizeMode={'contain'}  style={{height: '60%', width: undefined, }}/>
+            <View style={styles.contrainer}>
+                <ImageBackground style={styles.topContainer} source={require('../../../assets/backgrounds/sideMenu.jpg')}>
+                    <View style={styles.topInnerContainer}>
+                        <Progress.Circle borderWidth={0}
+                            thickness={8}
+                            
+                            progress={this.state.progress}
+                            size={115}
+                            color={accentColor} />
+                        <Image style={styles.logo}
+                            source={require('../../../assets/images/logos/sideMenuLogo.png')}
+                            resizeMode="contain" />
                     </View>
-                    <TouchableOpacity style={{paddingTop: 5}}>
-                        <EvilIcons name={'close'} size={28} color='white'/>
-                    </TouchableOpacity>
-                    </View>
-                </View>
-                <View style={styles.middleContainer}>
-                    <View style={{display: 'none'}}>
-                        <FlatList data={personalMenu} 
-                                    scrollEnabled={false} 
-                                    renderItem={({item}) => this.listItemRender(item)}/>
-                    </View>
-                </View>
+                </ImageBackground>
                 <View style={styles.bottomContainer}>
 
+                    <TouchableOpacity onPress={()=> this.navHandler('SignIn')} style={styles.listContainer}>
+                        <View style={styles.left}>
+                            <IonIcon name={'ios-lock'} size={36} color='white' />
+                        </View>
+                        <View style={styles.right}>
+                            <Text style={styles.listText}>LOGIN</Text>
+
+                        </View>
+                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                            {this.state.selected == 'SignIn' &&
+                                <IonIcon name={'ios-radio-button-on'} size={18} color={accentColor} />
+                            }
+
+                        </View>
+
+
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=> this.navHandler('CreditCard')}  style={{...styles.listContainer, marginTop: -1}}>
+                        <View style={styles.left}>
+                            <IonIcon name={'ios-card'} size={32} color='white' />
+                        </View>
+                        <View style={styles.right}>
+                            <Text style={styles.listText}>CREDIT CARD</Text>
+
+                        </View>
+                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                            {this.state.selected == 'CreditCard' &&
+                                <IonIcon name={'ios-radio-button-on'} size={18} color={accentColor} />
+                            }
+
+                        </View>
+
+
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=> this.navHandler('Map')}  style={{...styles.listContainer, marginTop: -1}}>
+                        <View style={styles.left}>
+                            <IonIcon name={'ios-map'} size={36} color='white' />
+                        </View>
+                        <View style={styles.right}>
+                            <Text style={styles.listText}>MAP</Text>
+
+                        </View>
+                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                            {this.state.selected == 'Map' &&
+                                <IonIcon name={'ios-radio-button-on'} size={18} color={accentColor} />
+                            }
+
+                        </View>
+
+
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=> this.navHandler('Swiper')}  style={styles.listContainer}>
+                        <View style={styles.left}>
+                            <IonIcon name={'ios-apps'} size={36} color='white' />
+                        </View>
+                        <View style={styles.right}>
+                            <Text style={styles.listText}>SWIPER</Text>
+
+                        </View>
+                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                            {this.state.selected == 'Swiper' &&
+                                <IonIcon name={'ios-radio-button-on'} size={18} color={accentColor} />
+                            }
+
+                        </View>
+
+
+                    </TouchableOpacity>
+
+
+
+                    <View style={styles.buttonCont}>
+                    <Text style={styles.listText}>START A PROJECT</Text>
+                    </View>
                 </View>
-            </ImageBackground>
-        )
+            </View>
+        );
     }
 }
+/*               
 
-// cellphone-settings-variant
-/*                        
+
+
+
+
+
                     <Button  title='START A PROJECT' 
                              buttonStyle={styles.button} 
                              containerStyle={styles.buttonCont} 
@@ -143,112 +186,80 @@ ios-radio-button-on*/
                                 style={{width: 230, height: 140}}/> */
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        //paddingTop: 22,
-       //justifyContent: 'flex-start',
-       // alignItems: 'center',
-       // backgroundColor: '#000000',
-    
-       //paddingLeft: 10,
+    contrainer: {
         width: 300,
-        //paddingLeft: 10
+        flex: 1
 
     },
 
-    nameContainer: {
-        flex: 0.5,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'flex-end',
-        //backgroundColor: '#0D0D0D',
-        backgroundColor:'rgba(15,15,15,1)',//'rgba(0,0,0,0.8)',
-        //marginLeft: -10,
-        paddingHorizontal: 10,
-        paddingBottom: 5,
-        //borderColor: 'green', borderWidth:1
-    
-        //borderBottomWidth: 2
-    },
-    middleContainer: {
-        flex: 3,
-        width: '100%',
+    topContainer: {
+        flex: 1,
+        //backgroundColor: 'green',
         justifyContent: 'center',
-        // borderTopWidth:1,
-        // borderBottomWidth:1,
-        
-       // backgroundColor: '#0D0D0D',
-       //backgroundColor: 'white',
-       backgroundColor:'rgba(15,15,15,1)',
+        alignItems: 'center'
     },
-    itemContainer: {
-        width: '100%',
-        padding: 8,   
-        paddingTop: 0,
-        paddingBottom: 0,
+    topInnerContainer: {
+        justifyContent: 'center',
         alignItems: 'center',
-
-
-    },
-    item: {
-        fontSize: 36,
-        //fontFamily: 'OpenSans-Regular',
-          fontFamily: 'Roboto-Light',
-        //fontWeight: "bold",
+        height: '100%',
         width: '100%',
-        color: '#ffffff',
-        //color: '#000000',
-   
- 
+        backgroundColor: 'rgba(0,0,0,0.4)'
     },
-    line:{
-        height: 35,
-        width: 0,
-        borderLeftWidth: 1,
-        borderRightWidth: 1,
-        borderColor: 'rgba(255,255,255,0.6)',
-        //borderColor: 'black'
-        borderRadius: 100,
-        marginTop: 5,
-        marginBottom: 5
+    logoCont: {
+
     },
-    iconContainer: {
-        paddingTop: 4
+    logo: {
+        height: 130,
+        width: 130,
+        position: 'absolute',
+
     },
     bottomContainer: {
-        flex: 0.75,
+        //backgroundColor: 'yellow',
+        flex: 2,
+        // borderWidth: 2,
+        // borderColor: 'yellow',
+
+    },
+
+    /**** LIST ****/
+    listContainer: {
+        backgroundColor: '#212121',
+        borderColor: '#434343',
+        borderTopWidth: 1,
+        flex: 1,
+        flexDirection: 'row',
+        width: '100%',
+        justifyContent: 'flex-start',
+        alignItems: 'center'
+
+    },
+    listText: {
+        color: 'white',
+        fontSize: 20,
+        fontFamily: 'OpenSans-Regular',
+    },
+    left: {
+        flex: 1.2,
         justifyContent: 'center',
         alignItems: 'center',
-        //backgroundColor: 'rgba(0,0,0,0.6)',
-        backgroundColor:'rgba(15,15,15,1)',
-        //backgroundColor: '#0D0D0D',
-        //marginLeft: -10,
-        width: 300
+        paddingTop: 4
+        //         borderWidth: 2,
+        // borderColor: 'yellow',
     },
+    right: {
+        flex: 3,
+        justifyContent: 'center',
+        alignItems: 'flex-start',
 
+        //         borderWidth: 2,
+        // borderColor: 'yellow',
+    },
     buttonCont: {
-        backgroundColor: '#28a745',
-        height: 40,
-        borderRadius: 20,
-        width: '80%',
-    },
-    button: {
-        backgroundColor: '#28a745',
-        height: 45,
-        borderRadius: 22.5,
-        width: '100%',
-    },
-    buttonTitle: {
-        fontFamily: 'Roboto-Regular',
-        fontSize: 16,
+        flex: 1,
+        backgroundColor: accentColor,
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
 
-        //fontWeight: 'bold'
-    },
-    buttonIcon: {
-        borderColor: 'black',
-        borderWidth: 1,
-        marginRight: 100
-    },
-
-
-  })
+});

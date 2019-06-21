@@ -76,7 +76,7 @@ export default class LoginInput extends Component<Props> {
     this.state.iconPadding,         
     {
       toValue: 12,                  
-      duration: 265,      
+      duration: 285,      
     }
   ).start()
     this.input.focus()
@@ -124,7 +124,8 @@ export default class LoginInput extends Component<Props> {
             <IonIcon name={this.props.icon} size={24} color={this.state.iconColor}/>
           </Animated.View>
           <View style={styles.inputContainer}>
-            <TextInput placeholder={this.props.placeholder} 
+            <TextInput  {...this.props}
+                   
                         style={{...styles.input, opacity: this.state.opacity }}
                         onFocus={this.focus}
                         ref={(_ref) => this.input = _ref} 
@@ -132,12 +133,9 @@ export default class LoginInput extends Component<Props> {
                         secureTextEntry={this.props.secure}
                         autoCapitalize={this.props.autoCapitalize ? this.props.autoCapitalize: 'none'}
                         onChangeText={(enteredText) => this.onChangeText(enteredText)}
-                        textContentType={this.props.textContentType}
                         value={this.state.enteredText}
                         placeholderTextColor='#F5FCFF'
-                        autoFocus={this.props.autoFocus}
-                        returnKeyType={this.props.returnKeyType}
-                        onSubmitEditing={this.props.onSubmitEditing}
+
             />
           </View>
         </Animated.View>
@@ -149,7 +147,7 @@ const styles = StyleSheet.create({
 
     container: {
         height: 40,
-        width: 265,
+        width: 285,
         borderRadius: 40,
         borderWidth: 2,
         flexDirection: 'row',
@@ -164,7 +162,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         borderRadius: 60,
         height: 40,
-        width: 265,
+        width: 285,
       },
       input: {
         height: '100%',

@@ -123,27 +123,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#0D0D0D',
        
     },
-    itemContainer: {
-        width: '100%',
-        padding: 13,   
-        flexDirection: 'row',
-        alignItems: 'center',
-        //borderColor: 'white',
-        //borderWidth: 1
-        paddingLeft: 20
-    },
-    item: {
-        fontSize: 22,
-        fontFamily: 'OpenSans-Regular',
-        fontWeight: "100",
-        width: '100%',
-        color: '#ffffff',
-        //color: '#000000',
-        marginLeft: 15
-    },
-    iconContainer: {
-        paddingTop: 4
-    },
+   
     bottomContainer: {
         flex: 1,
         justifyContent: 'center',

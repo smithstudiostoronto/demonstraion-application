@@ -100,9 +100,10 @@ export const mainStack = {
 export const mainRoot =  {root: {
   sideMenu: {
     left: {
-
+      width: 300,
       component: {
         name: 'SideMenuLeft',
+
         passProps: {
           side: 'left'
         }
@@ -111,6 +112,7 @@ export const mainRoot =  {root: {
 
     center: {
       component: {
+
         name: 'SignIn',
 
       }

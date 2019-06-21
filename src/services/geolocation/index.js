@@ -11,3 +11,4 @@ export const geolocationService = {
 
   watchLocation: Platform.OS === 'ios' ?  watchPositionIos :  watchPositionAndroid
 }
+

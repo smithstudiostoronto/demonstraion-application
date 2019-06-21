@@ -14,7 +14,7 @@ export default class LoginButton extends Component<Props> {
     fadeAnimatedWidth: new Animated.Value(0),
     fadeAnimatedHeight: new Animated.Value(0),
 
-    contAnimatedWidth: new Animated.Value(250),
+    contAnimatedWidth: new Animated.Value (275),
     contAnimatedHeight: new Animated.Value(50),
 
     textOpacityAnimated: new Animated.Value(1),
@@ -43,7 +43,7 @@ export default class LoginButton extends Component<Props> {
         Animated.timing(                 
           this.state.contAnimatedWidth,           
           {
-            toValue: 250,              
+            toValue: 275,              
             duration: 300,       
           }
         ),
@@ -80,7 +80,7 @@ export default class LoginButton extends Component<Props> {
         Animated.timing(                  
           this.state.fadeAnimatedWidth,         
           {
-            toValue: 250,                  
+            toValue: 275,                  
             duration: 300,      
           }
         ),
@@ -119,7 +119,7 @@ export default class LoginButton extends Component<Props> {
           {
             toValue: 1,                  
             duration: 50,    
-            delay: 250         
+            delay: 275         
           }
         ),
       ]),
@@ -169,7 +169,7 @@ export default class LoginButton extends Component<Props> {
 
 const styles = StyleSheet.create({
   container: {
-    width: 250,
+    width: 275,
     height: 50,
     borderRadius: 50,
   },
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
   innerContainer: {
     borderColor: '#F5FCFF',
     borderWidth: 1,
-    width: 250,
+    width: 275,
     height: 50,
     borderRadius: 50,
     justifyContent: 'center',

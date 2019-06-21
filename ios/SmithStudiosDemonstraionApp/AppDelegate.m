@@ -17,7 +17,7 @@
   [ReactNativeNavigation bootstrap:jsCodeLocation launchOptions:launchOptions];
   //AIzaSyDVl6xUw3da_7doyCYGCwL84ulBBUpmZuk
   
-  [RNSplashScreen show];
+  //[RNSplashScreen show];
   return YES;
 }
 
