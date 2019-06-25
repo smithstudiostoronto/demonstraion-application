@@ -11,11 +11,17 @@ import App from "./App";
 import SideMenuLeft from './src/components/SideMenu/SideMenuLeft';
 import SignIn from './src/components/SignIn/SignIn';
 import DeadEnd from './src/components/DeadEnd';
+import CreditCard from './src/components/CreditCard/CreditCard';
+import Swiper from './src/components/Swiper/Swiper';
+//import MainMap from './src/components/MainMap/MainMap';
 
 Navigation.registerComponent(`App`, () => App);
 Navigation.registerComponent(`SideMenuLeft`, () => SideMenuLeft);
 Navigation.registerComponent(`SignIn`, () => SignIn);
 Navigation.registerComponent(`DeadEnd`, () => DeadEnd);
+Navigation.registerComponent(`CreditCard`, () => CreditCard);
+Navigation.registerComponent(`Swiper`, () => Swiper);
+//Navigation.registerComponent(`MainMap`, () => MainMap);
 
 
 Navigation.events().registerAppLaunchedListener(  () => {

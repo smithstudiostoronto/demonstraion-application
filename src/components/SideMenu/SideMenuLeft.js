@@ -21,12 +21,7 @@ import { store } from '../../state/store';
 
 import * as Progress from 'react-native-progress';
 
-const navMenuList = [
-    { key: 'LOGIN', icon: 'ios-home', nav: 'MainMap', i: 1 },
-    { key: 'CREDIT CARD', icon: 'ios-search', nav: 'Explore', i: 2 },
-    { key: 'MAP', icon: 'ios-heart', nav: 'Saved', i: 3 },
-    { key: 'SWIPER', icon: 'ios-chatboxes', nav: 'Chat', i: 4 },
-]
+
 
 const accentColor = '#1FB85A';
 type Props = {};
@@ -40,8 +35,18 @@ export default class SideMenuLeft extends Component<Props> {
         Navigation.events().bindComponent(this);
     }
 
+    hideSideBar = () => {
+        Navigation.mergeOptions(this.props.componentId, {
+            sideMenu: {
+              left: {
+                visible: false
+              }
+            }
+          
+          });
+    }
     navigate = (screenName) => {
-        Navigation.push(this.props.componentId, {
+        Navigation.push('CENTER_STACK', {
             component: {
                 name: screenName
             }
@@ -50,7 +55,8 @@ export default class SideMenuLeft extends Component<Props> {
    
     componentDidAppear() {
         console.log('fired')
-        setTimeout(()=>  this.setState({progress: 0.6}), 2500)
+ 
+        setTimeout(()=>  this.setState({progress: 0.6}), 800);
    
     }
     componentDidDisappear() {
@@ -66,8 +72,9 @@ export default class SideMenuLeft extends Component<Props> {
     */
 
     navHandler = async (destinationName) => {
-
         await this.setState({selected: destinationName});
+        this.hideSideBar();
+        this.navigate(destinationName);
     }
 
     render() {
@@ -122,7 +129,7 @@ export default class SideMenuLeft extends Component<Props> {
 
 
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=> this.navHandler('Map')}  style={{...styles.listContainer, marginTop: -1}}>
+                    <TouchableOpacity onPress={()=> this.navHandler('Swiper')}  style={{...styles.listContainer, marginTop: -1}}>
                         <View style={styles.left}>
                             <IonIcon name={'ios-map'} size={36} color='white' />
                         </View>
@@ -131,7 +138,7 @@ export default class SideMenuLeft extends Component<Props> {
 
                         </View>
                         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                            {this.state.selected == 'Map' &&
+                            {this.state.selected == 'Swiper' &&
                                 <IonIcon name={'ios-radio-button-on'} size={18} color={accentColor} />
                             }
 
@@ -193,7 +200,7 @@ const styles = StyleSheet.create({
     },
 
     topContainer: {
-        flex: 1,
+        flex: 1.25,
         //backgroundColor: 'green',
         justifyContent: 'center',
         alignItems: 'center'

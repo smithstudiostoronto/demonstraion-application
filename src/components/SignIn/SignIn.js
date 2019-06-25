@@ -144,7 +144,7 @@ export default class SignIn extends Component<Props> {
                   icon='ios-mail' 
                   style={styles.input}
                   keyboardType={"email-address"}
-                  autoFocus={true}
+                  //autoFocus={true}
                   returnKeyType={'next'}
                   onSubmitEditing={() => { this.passwordInput.focus(); }}
                   textContentType='username'>

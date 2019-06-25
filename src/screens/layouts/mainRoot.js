@@ -96,36 +96,75 @@ export const mainStack = {
 
 
 
+export const mainRoot = {
+  root: {
+    sideMenu: {
+        left: {
+            component: {
+                name: 'SideMenuLeft',
+                
+            },
+        },
+        center: {
+            stack: {
+                options: {
+                    topBar: {
+                        visible: false
+                    },
+                    popGesture: false,
+                  
+                },
+                id: 'CENTER_STACK',
+                children: [
+                    {
+                      component: {
+                        name: 'Swiper',
+                    },
 
-export const mainRoot =  {root: {
-  sideMenu: {
-    left: {
-      width: 300,
-      component: {
-        name: 'SideMenuLeft',
-
-        passProps: {
-          side: 'left'
-        }
-      }
+                        component: {
+                          name: 'CreditCard',
+                      },
+                      component: {
+                        name: 'SignIn',
+                      },
+                    },
+                ],
+            },
+        },
+        right: {
+            component: {
+                name: 'SideMenuLeft',
+                id: 'SideMenuRight',
+            },
+        },
     },
-
-    center: {
-      component: {
-
-        name: 'SignIn',
-
-      }
-    } ,
-
-    right: {
-      component: {
-        name: 'SideMenuLeft',
-        passProps: {
-          side: 'right'
-        }
-      }
-    }
-  }
 }
-};
+}
+
+
+
+
+/** 
+ *         stack: {
+          id: 'CENTER_STACK',
+          children: [
+            {
+              component: {
+                name: 'SignIn',
+                passProps: {
+                  side: 'center'
+              }
+            }
+            },
+            {
+              component: {
+                name: 'CreditCard',
+                passProps: {
+                  side: 'center'
+              }
+              }
+            }
+          ]
+        }
+        ,
+ */
