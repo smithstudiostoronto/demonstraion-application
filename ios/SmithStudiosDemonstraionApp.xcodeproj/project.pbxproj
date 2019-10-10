@@ -52,7 +52,7 @@
 		AACFCEC31FA342C683C16209 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BDC46781D21E4530950B1613 /* FontAwesome5_Brands.ttf */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		B111467422C289E700076CD6 /* libRNCardIO.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B111466C22C289D100076CD6 /* libRNCardIO.a */; };
-		B1405C0C22706A9500DAA5C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1405C0B22706A9500DAA5C1 /* LaunchScreen.storyboard */; };
+		B111469922C2BA2900076CD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B111469822C2BA2900076CD6 /* LaunchScreen.storyboard */; };
 		B1405C5022706D4000DAA5C1 /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B1405C4F22706D2900DAA5C1 /* libSplashScreen.a */; };
 		B199BE3922BC4F4800E12B25 /* libART.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B199BE0822BC4F3400E12B25 /* libART.a */; };
 		B19FF0B0222475C40069990D /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B19FF0AD222475A20069990D /* libReactNativeNavigation.a */; };
@@ -485,7 +485,7 @@
 		ABA8E40A914042F099F51F99 /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-LightItalic.ttf"; path = "../assets/fonts/Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		B111463E22C289D100076CD6 /* RNCardIO.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNCardIO.xcodeproj; path = "../node_modules/react-native-awesome-card-io/ios/RNCardIO.xcodeproj"; sourceTree = "<group>"; };
-		B1405C0B22706A9500DAA5C1 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B111469822C2BA2900076CD6 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B1405C1D22706D2800DAA5C1 /* SplashScreen.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SplashScreen.xcodeproj; path = "../node_modules/react-native-splash-screen/ios/SplashScreen.xcodeproj"; sourceTree = "<group>"; };
 		B171FD8622269D90008B05B0 /* RNSpinkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSpinkit.xcodeproj; path = "../node_modules/react-native-spinkit/ios/RNSpinkit.xcodeproj"; sourceTree = "<group>"; };
 		B199BE0222BC4F3400E12B25 /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
@@ -630,13 +630,13 @@
 		13B07FAE1A68108700A75B9A /* SmithStudiosDemonstraionApp */ = {
 			isa = PBXGroup;
 			children = (
+				B111469822C2BA2900076CD6 /* LaunchScreen.storyboard */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
-				B1405C0B22706A9500DAA5C1 /* LaunchScreen.storyboard */,
 			);
 			name = SmithStudiosDemonstraionApp;
 			sourceTree = "<group>";
@@ -1413,7 +1413,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B1405C0C22706A9500DAA5C1 /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				BC55174F74D94378A08B11A3 /* Open Sans Bold.ttf in Resources */,
 				1365A63AB4E64DC9B48342A6 /* Open Sans BoldItalic.ttf in Resources */,
@@ -1447,6 +1446,7 @@
 				372C8A60CEF74E508620F712 /* Roboto-Italic.ttf in Resources */,
 				D5985A22B2C64BF58396AFA8 /* Roboto-Light.ttf in Resources */,
 				80658CF8ABE2464C8C8F90F2 /* Roboto-LightItalic.ttf in Resources */,
+				B111469922C2BA2900076CD6 /* LaunchScreen.storyboard in Resources */,
 				6DE757528EC146C181C499EF /* Roboto-Medium.ttf in Resources */,
 				14F1086B92A94427B5BD03ED /* Roboto-MediumItalic.ttf in Resources */,
 				C182F5C263124451876B7A52 /* Roboto-Regular.ttf in Resources */,

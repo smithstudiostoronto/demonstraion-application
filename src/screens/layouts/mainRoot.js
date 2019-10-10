@@ -1,5 +1,153 @@
 
+
+
+/**** Stack Children Components ****/
+
+
+
+
+
+/**** Main Center Stack ****/
+
+const mainCenterStack = {
+  stack: {
+    id: 'mainStack',
+    children: [
+
+    ]
+  }
+}
+
+/**** Main Root ****/
+export const mainRoot = {
+  root: {
+    sideMenu: {
+        left: {
+            component: {
+                name: 'SideMenuLeft',
+                
+            },
+        },
+        center: {
+            stack: {
+                options: {
+                    topBar: {
+                        visible: false
+                    },
+                    popGesture: false,
+                  
+                },
+                id: 'CENTER_STACK',
+                children: [
+                    {
+                      component: {
+                        name: 'Swiper',
+                    },
+
+                        component: {
+                          name: 'CreditCard',
+                      },
+                      component: {
+                        name: 'SignIn',
+                      },
+                    },
+                ],
+            },
+        },
+        right: {
+            component: {
+                name: 'SideMenuLeft',
+                id: 'SideMenuRight',
+            },
+        },
+    },
+}
+}
+
+
+
+
+
 /*
+export const mainRoot = {
+  root: {
+    sideMenu: {
+        left: {
+            component: {
+                name: 'SideMenuLeft',
+                
+            },
+        },
+        center: {
+            stack: {
+                options: {
+                    topBar: {
+                        visible: false
+                    },
+                    popGesture: false,
+                  
+                },
+                id: 'CENTER_STACK',
+                children: [
+                    {
+                      component: {
+                        name: 'Swiper',
+                    },
+
+                        component: {
+                          name: 'CreditCard',
+                      },
+                      component: {
+                        name: 'SignIn',
+                      },
+                    },
+                ],
+            },
+        },
+        right: {
+            component: {
+                name: 'SideMenuLeft',
+                id: 'SideMenuRight',
+            },
+        },
+    },
+}
+}
+
+
+
+*/
+
+
+/** 
+ *         stack: {
+          id: 'CENTER_STACK',
+          children: [
+            {
+              component: {
+                name: 'SignIn',
+                passProps: {
+                  side: 'center'
+              }
+            }
+            },
+            {
+              component: {
+                name: 'CreditCard',
+                passProps: {
+                  side: 'center'
+              }
+              }
+            }
+          ]
+        }
+        ,
+ */
+
+
+ 
+
+ /*
 export const mainStack = {
   bottomTabs: {
     children: [
@@ -93,78 +241,3 @@ export const mainStack = {
   }
 }
 */
-
-
-
-export const mainRoot = {
-  root: {
-    sideMenu: {
-        left: {
-            component: {
-                name: 'SideMenuLeft',
-                
-            },
-        },
-        center: {
-            stack: {
-                options: {
-                    topBar: {
-                        visible: false
-                    },
-                    popGesture: false,
-                  
-                },
-                id: 'CENTER_STACK',
-                children: [
-                    {
-                      component: {
-                        name: 'Swiper',
-                    },
-
-                        component: {
-                          name: 'CreditCard',
-                      },
-                      component: {
-                        name: 'SignIn',
-                      },
-                    },
-                ],
-            },
-        },
-        right: {
-            component: {
-                name: 'SideMenuLeft',
-                id: 'SideMenuRight',
-            },
-        },
-    },
-}
-}
-
-
-
-
-/** 
- *         stack: {
-          id: 'CENTER_STACK',
-          children: [
-            {
-              component: {
-                name: 'SignIn',
-                passProps: {
-                  side: 'center'
-              }
-            }
-            },
-            {
-              component: {
-                name: 'CreditCard',
-                passProps: {
-                  side: 'center'
-              }
-              }
-            }
-          ]
-        }
-        ,
- */

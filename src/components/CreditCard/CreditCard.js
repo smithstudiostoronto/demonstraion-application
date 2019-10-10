@@ -21,10 +21,10 @@ export default class CreditCard extends Component {
   componentDidAppear() {
 
 
-    this.scanCard();
-
+ 
 }
   scanCard() {
+    console.log("here")
     CardIOModule
       .scanCard({hideCardIOLogo: true, scanExpiry: true})
       .then(card => {
@@ -37,10 +37,13 @@ export default class CreditCard extends Component {
  
 
 
+
+
+
   render() {
     return (
       <View style={{justifyContent: 'center', flex: 1}}>
-        <TouchableOpacity onPress={this.scanCard.bind(this)}>
+        <TouchableOpacity onPress={this.scanCard}>
           <Text>Scan card!</Text>
         </TouchableOpacity>
       </View>

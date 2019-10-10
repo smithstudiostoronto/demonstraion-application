@@ -26,7 +26,7 @@ Navigation.registerComponent(`Swiper`, () => Swiper);
 
 Navigation.events().registerAppLaunchedListener(  () => {
 
-
+  console.log(mainRoot);
   //SplashScreen.hide();
   // Start tracking geolocation then launch main root
   geolocationService.watchLocation(  () => {

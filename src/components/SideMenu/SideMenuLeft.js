@@ -60,7 +60,6 @@ export default class SideMenuLeft extends Component<Props> {
    
     }
     componentDidDisappear() {
-      
         this.setState({progress: 0});
     }
     /*
@@ -75,6 +74,7 @@ export default class SideMenuLeft extends Component<Props> {
         await this.setState({selected: destinationName});
         this.hideSideBar();
         this.navigate(destinationName);
+  
     }
 
     render() {
@@ -84,7 +84,6 @@ export default class SideMenuLeft extends Component<Props> {
                     <View style={styles.topInnerContainer}>
                         <Progress.Circle borderWidth={0}
                             thickness={8}
-                            
                             progress={this.state.progress}
                             size={115}
                             color={accentColor} />
